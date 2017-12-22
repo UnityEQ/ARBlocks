@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Name: SimpleMapFlatTerrain
   m_EditorClassIdentifier: 
   _baseMaterial: {fileID: 2100000, guid: 321d9d594e9694d2bad241f80cf0af89, type: 2}
+  _createSideWalls: 0
+  _sideWallHeight: 10
+  _sideWallMaterial: {fileID: 0}
   _addCollider: 0
   _addToLayer: 1
-  _layerId: 9
+  _layerId: 8

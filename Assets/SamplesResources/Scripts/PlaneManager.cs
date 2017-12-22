@@ -75,12 +75,12 @@ public class PlaneManager : MonoBehaviour
 
     void LateUpdate()
     {
-        if (AutomaticHitTestFrameCount == Time.frameCount)
+        if (AutomaticHitTestFrameCount == Time.frameCount && blockToggle.isOn)
         {
             // We got an automatic hit test this frame
             m_GroundReticle.alpha = 0; // hide the onscreen reticle
             m_OnScreenMessage.enabled = false; // hide the onscreen message
-            //SetSurfaceIndicatorVisible(true); // display the surface indicator
+            SetSurfaceIndicatorVisible(true); // display the surface indicator
         }
         else
         {
@@ -302,6 +302,7 @@ public class PlaneManager : MonoBehaviour
 			blockToggle.isOn = false;
 			axeToggle.isOn = false;
 			ballToggle.isOn = false;
+			m_OnScreenMessage.text = "";
         }
     }
 
@@ -315,6 +316,7 @@ public class PlaneManager : MonoBehaviour
 			blockToggle.isOn = false;
 			axeToggle.isOn = false;
 			ballToggle.isOn = false;
+			m_OnScreenMessage.text = "";
         }
     }
     

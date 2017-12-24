@@ -69,8 +69,10 @@
      <Compile Include="Assets\Game\Blocks\Scripts\BlocksSpawner.cs" />
      <Compile Include="Assets\Game\Blocks\Scripts\BottomBarBehavior.cs" />
      <Compile Include="Assets\Game\Blocks\Scripts\Cylinder.cs" />
+     <Compile Include="Assets\Game\Blocks\Scripts\DeviceAuthentication.cs" />
      <Compile Include="Assets\Game\Blocks\Scripts\ExplosionBehavior.cs" />
      <Compile Include="Assets\Game\Blocks\Scripts\GameObjectPool.cs" />
+     <Compile Include="Assets\Game\Blocks\Scripts\GameSparksManager.cs" />
      <Compile Include="Assets\Game\Blocks\Scripts\PinController.cs" />
      <Compile Include="Assets\Game\Blocks\Scripts\TouchCamera.cs" />
      <Compile Include="Assets\Game\Blocks\Scripts\UserRotateTouch.cs" />

@@ -9,6 +9,12 @@ countries.
 using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
+using Mapbox.Unity.Location;
+using Mapbox.Unity.Utilities;
+using Mapbox.Unity.Map;
+using Mapbox.Utils;
+using Mapbox.Examples;
+
 
 public class PlaneManager : MonoBehaviour
 {
@@ -28,6 +34,9 @@ public class PlaneManager : MonoBehaviour
     public UnityEngine.UI.Image m_PlaneModeIcon;
     public UnityEngine.UI.Toggle axeToggle,blockToggle,ballToggle;
     public CanvasGroup m_GroundReticle;
+	public AxeControl axeControl;
+	public AbstractMap _map;
+	public GameObject m_ballPrefab;
     #endregion // PUBLIC_MEMBERS
 
 
@@ -196,8 +205,8 @@ public class PlaneManager : MonoBehaviour
         if (!blockToggle.interactable)
         {
             // Runs only once after first successful Automatic hit test
-            blockToggle.interactable = true;
-            blockToggle.isOn = true;
+            //blockToggle.interactable = true;
+            //blockToggle.isOn = true;
         }
     }
 
@@ -237,10 +246,28 @@ public class PlaneManager : MonoBehaviour
                     // On initial run, unhide the augmentation
                     m_PlaneAugmentation.SetActive(true);
                 }
-
-                Debug.Log("Positioning Plane Augmentation at: " + result.Position);
-                m_PlaneAugmentation.PositionAt(result.Position);
-                RotateTowardCamera(m_PlaneAugmentation);
+				
+				if(axeToggle)
+				{
+					axeControl.UseWeapon ();
+				}
+				if(blockToggle)
+				{
+					Vector2d geoloc = result.Position.GetGeoPosition(_map.CenterMercator, _map.WorldRelativeScale);
+					BlocksSpawner.Instance.SaveMessage ("test",result.Position.y,geoloc.x, geoloc.y,Input.location.lastData.altitude,1,1);
+					BlocksSpawner.Instance.CleanPool(true);
+				}
+				if(ballToggle)
+				{
+					var cameraTransform = Camera.main;
+					var ball = GameObject.Instantiate (m_ballPrefab, cameraTransform.transform.position, Quaternion.identity);
+					ball.GetComponentInChildren<Rigidbody> ().AddForce (cameraTransform.transform.forward * 500.0f);
+					//ball.AddComponent<BallDestroy>();
+					ball.AddComponent<BallBuster>();
+				}
+                //Debug.Log("Positioning Plane Augmentation at: " + result.Position);
+                //m_PlaneAugmentation.PositionAt(result.Position);
+                //RotateTowardCamera(m_PlaneAugmentation);
 
                 break;
 

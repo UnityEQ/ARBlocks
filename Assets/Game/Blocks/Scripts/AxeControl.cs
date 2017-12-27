@@ -10,7 +10,7 @@ public class AxeControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		anim = GetComponent<Animation> ();
+		anim = this.gameObject.GetComponent<Animation> ();
 		camera = Camera.main;
 	}
 

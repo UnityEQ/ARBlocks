@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BallBuster : MonoBehaviour {
+	public float ballToCam;
+	public Vector3 camPos;
 	// Use this for initialization
 	void Start () {
+		//Vector3 screenSpaceCenter = new Vector3(0.5f,0.5f,0);
+		//Vector3 shootEnd = Camera.main.ViewportToWorldPoint(screenSpaceCenter);
+		this.GetComponent<Rigidbody> ().AddForce(transform.forward * 90f);
+		camPos = Camera.main.transform.position;
 	}
 	
 	void OnCollisionEnter(Collision col){
@@ -21,7 +27,8 @@ public class BallBuster : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if(this.gameObject.transform.position.y < -600)
+		ballToCam = Vector3.Distance(camPos, this.transform.position);
+		if(ballToCam > 30)
 		{
 			destroyThis();
 		}
